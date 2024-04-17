@@ -12,6 +12,22 @@
   <link rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.min.css' %}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{% static 'dist/css/adminlte.min.css' %}">
+
+  <style>
+    .seat {
+      padding: 5px;
+    }
+    .seat-icon {
+      font-size: 24px; /* Adjust icon size as needed */
+    }
+    .available {
+      color: green;
+    }
+    .occupied {
+      color: grey;
+    }
+  </style>
+
 </head>
 <body class="hold-transition layout-top-nav">
 <div class="wrapper">
@@ -44,7 +60,16 @@
     <div class="content">
       <div class="container">
         <div class="row">
-          oi
+          {% for seat in seats %}
+            <div class="col-2 seat">
+              <i class="fas fa-chair seat-icon {% if not seat.is_occupied %}available{% else %}occupied{% endif %}"></i>
+              <p>Seat {{ seat.seat_number }}</p>
+            </div>
+            <!-- Break the row every 5 seats -->
+            {% if forloop.counter|divisibleby:5 and not forloop.last %}
+              </div><div class="row">
+            {% endif %}
+          {% endfor %}
         </div>
         <!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -73,7 +98,5 @@
 <script src="{% static 'plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 <!-- AdminLTE App -->
 <script src="{% static 'dist/js/adminlte.min.js' %}"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="{% static 'dist/js/demo.js' %}"></script>
 </body>
 </html>

@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  ticket_app:
+    build: .
+    command: gunicorn ticket_app.wsgi:application --bind 127.0.0.1:8000
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    environment:
+      - DEBUG=1 # Set to 0 in production

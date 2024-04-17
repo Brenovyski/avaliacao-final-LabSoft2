@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  map_app:
+    build: .
+    command: gunicorn map_app.wsgi:application --bind 127.0.0.1:8001
+    volumes:
+      - .:/app
+    ports:
+      - "8001:8001"
+    environment:
+      - DEBUG=1 # Set to 0 in production

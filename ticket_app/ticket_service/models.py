@@ -1,3 +1,4 @@
 from django.db import models
 
-# Create your models here.
+class Ticket(models.Model):
+    seat_number = models.CharField(max_length=10, unique=True)
